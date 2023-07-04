@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class=container>
+        <h1>Weather App</h1>
+        <div>
+          <div id="city"></div>
+          <div id="description"></div>
+          <div id="icon"></div>
+        </div>
+    </div>    
+    <script>
+
+        const urlGif = fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=0132a21e6e9f33217a196227353e5e3b')
+        .then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data)
+            const city = document.getElementById("city");
+            const description = document.getElementById("description");
+            const icon = document.getElementById("icon");
+            city.innerHTML = data.name;
+            description.innerHTML = data.weather[0].description;
+            icon.innerHTML = `<img decoding=async src=https://openweathermap.org/img/wn/${data.weather[0].icon}.png ">`;
+  })
+        .catch((error) => {
+            console.log(error);
+        });
+
+    </script>
+</body>
+</html>
